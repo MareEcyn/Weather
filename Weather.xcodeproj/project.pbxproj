@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,14 @@
 		E676281226DE2C6700179D79 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676281126DE2C6700179D79 /* HomeViewController.swift */; };
 		E676281726DE2C6900179D79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E676281626DE2C6900179D79 /* Assets.xcassets */; };
 		E676281A26DE2C6900179D79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E676281826DE2C6900179D79 /* LaunchScreen.storyboard */; };
+		E676282626DE30EB00179D79 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676282526DE30EB00179D79 /* UIColor+Ext.swift */; };
+		E676282826DE315100179D79 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676282726DE315100179D79 /* DetailViewController.swift */; };
+		E676282A26DE316B00179D79 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676282926DE316B00179D79 /* Coordinator.swift */; };
+		E676282C26DE319800179D79 /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676282B26DE319800179D79 /* DependencyManager.swift */; };
+		E676282E26DE334700179D79 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676282D26DE334700179D79 /* HomeViewModel.swift */; };
+		E676283026DE381700179D79 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676282F26DE381700179D79 /* SearchButton.swift */; };
+		E676283226DE39D900179D79 /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676283126DE39D900179D79 /* CityCell.swift */; };
+		E676283426DE3E8200179D79 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E676283326DE3E8200179D79 /* UIViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +34,14 @@
 		E676281626DE2C6900179D79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E676281926DE2C6900179D79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E676281B26DE2C6900179D79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E676282526DE30EB00179D79 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		E676282726DE315100179D79 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		E676282926DE316B00179D79 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		E676282B26DE319800179D79 /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
+		E676282D26DE334700179D79 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E676282F26DE381700179D79 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
+		E676283126DE39D900179D79 /* CityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCell.swift; sourceTree = "<group>"; };
+		E676283326DE3E8200179D79 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +62,6 @@
 				94B0BEE7855415A8A219AE75 /* Pods-Weather.debug.xcconfig */,
 				70008BD85F6D4B81505EC092 /* Pods-Weather.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -79,14 +94,54 @@
 		E676280C26DE2C6700179D79 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				E676280D26DE2C6700179D79 /* AppDelegate.swift */,
-				E676280F26DE2C6700179D79 /* SceneDelegate.swift */,
-				E676281126DE2C6700179D79 /* HomeViewController.swift */,
-				E676281626DE2C6900179D79 /* Assets.xcassets */,
-				E676281826DE2C6900179D79 /* LaunchScreen.storyboard */,
-				E676281B26DE2C6900179D79 /* Info.plist */,
+				E676282326DE2FF500179D79 /* Resources */,
+				E676282226DE2FE800179D79 /* Presentation */,
+				E676282126DE2FE000179D79 /* Application */,
 			);
 			path = Weather;
+			sourceTree = "<group>";
+		};
+		E676282126DE2FE000179D79 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				E676280D26DE2C6700179D79 /* AppDelegate.swift */,
+				E676280F26DE2C6700179D79 /* SceneDelegate.swift */,
+				E676282926DE316B00179D79 /* Coordinator.swift */,
+				E676282B26DE319800179D79 /* DependencyManager.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		E676282226DE2FE800179D79 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E676282426DE30D600179D79 /* Extension */,
+				E676281826DE2C6900179D79 /* LaunchScreen.storyboard */,
+				E676281126DE2C6700179D79 /* HomeViewController.swift */,
+				E676282726DE315100179D79 /* DetailViewController.swift */,
+				E676282D26DE334700179D79 /* HomeViewModel.swift */,
+				E676282F26DE381700179D79 /* SearchButton.swift */,
+				E676283126DE39D900179D79 /* CityCell.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E676282326DE2FF500179D79 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E676281626DE2C6900179D79 /* Assets.xcassets */,
+				E676281B26DE2C6900179D79 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E676282426DE30D600179D79 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E676282526DE30EB00179D79 /* UIColor+Ext.swift */,
+				E676283326DE3E8200179D79 /* UIViewController+Ext.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,6 +152,7 @@
 			buildConfigurationList = E676281E26DE2C6900179D79 /* Build configuration list for PBXNativeTarget "Weather" */;
 			buildPhases = (
 				10514A657C6726B653F4403B /* [CP] Check Pods Manifest.lock */,
+				E676283526DE400300179D79 /* SwiftLint */,
 				E676280626DE2C6700179D79 /* Sources */,
 				E676280726DE2C6700179D79 /* Frameworks */,
 				E676280826DE2C6700179D79 /* Resources */,
@@ -195,6 +251,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Weather/Pods-Weather-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E676283526DE400300179D79 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -203,8 +277,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E676281226DE2C6700179D79 /* HomeViewController.swift in Sources */,
+				E676282626DE30EB00179D79 /* UIColor+Ext.swift in Sources */,
+				E676283226DE39D900179D79 /* CityCell.swift in Sources */,
+				E676283426DE3E8200179D79 /* UIViewController+Ext.swift in Sources */,
+				E676282A26DE316B00179D79 /* Coordinator.swift in Sources */,
+				E676282E26DE334700179D79 /* HomeViewModel.swift in Sources */,
+				E676282826DE315100179D79 /* DetailViewController.swift in Sources */,
 				E676280E26DE2C6700179D79 /* AppDelegate.swift in Sources */,
 				E676281026DE2C6700179D79 /* SceneDelegate.swift in Sources */,
+				E676282C26DE319800179D79 /* DependencyManager.swift in Sources */,
+				E676283026DE381700179D79 /* SearchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +428,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 98NLZHSYYL;
-				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_FILE = Weather/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -366,7 +448,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 98NLZHSYYL;
-				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_FILE = Weather/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
