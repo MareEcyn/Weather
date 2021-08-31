@@ -1,0 +1,56 @@
+opt_in_rules:
+# Kind: perfomance
+  - empty_collection_literal
+  - empty_count
+# Kind: style
+  - Attributes
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - empty_enum_arguments
+  - modifier_order
+  - multiline_arguments
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - operator_usage_whitespace
+  - type_contents_order
+  - vertical_parameter_alignment_on_call
+# Kind: idiomatic
+  - file_name
+  - file_name_no_space
+  - file_types_order
+  - for_where
+  - unavailable_function
+# Kind: lint
+  - unused_declaration
+  - unused_import
+  - yoda_condition
+
+excluded:
+  - Pods
+  - R.generated.swift
+  - AppDelegate.swift
+  - SceneDelegate.swift
+
+indentation: 4
+file_length:
+  - 1500
+  - 2000
+type_body_length:
+  - 500
+  - 1000
+function_body_length:
+  - 100
+  - 200
+large_tuple:
+  - 3
+  - 5
+
+disabled_rules:
+  - identifier_name
+  - force_cast
+  - force_try
+  - nesting
+  - trailing_comma
+  - trailing_whitespace
+  - file_types_order # For SwiftUI _Previews
