@@ -1,11 +1,11 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '14.0'
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
 
 target 'Weather' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for Weather
   pod 'Alamofire', '~> 5.4'
+  pod 'Kingfisher', '~> 6.3'
+  pod 'SVGKit', '~>3.0'
+  pod 'SwiftyJSON', '~> 4.0'
 
 end
