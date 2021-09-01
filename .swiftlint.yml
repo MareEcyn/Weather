@@ -3,7 +3,6 @@ opt_in_rules:
   - empty_collection_literal
   - empty_count
 # Kind: style
-  - Attributes
   - closure_end_indentation
   - closure_spacing
   - collection_alignment
@@ -42,9 +41,11 @@ type_body_length:
 function_body_length:
   - 100
   - 200
+line_length:
+  - 140
 large_tuple:
-  - 3
-  - 5
+  - 4
+  - 7
 
 disabled_rules:
   - identifier_name
@@ -54,3 +55,4 @@ disabled_rules:
   - trailing_comma
   - trailing_whitespace
   - file_types_order # For SwiftUI _Previews
+  - multiline_arguments
