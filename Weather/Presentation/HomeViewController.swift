@@ -1,5 +1,3 @@
-// swiftlint:disable line_length
-
 import UIKit
 
 // MARK: - UIViewController life-cycle
@@ -24,14 +22,23 @@ class HomeViewController: UIViewController {
         searchField.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
+        model.loadWeatherList(onSuccess: { [unowned self] in
+            self.tableView.reloadData()
+        }, onError: { [unowned self] in
+            let alert = UIAlertController(title: "Ошибка",
+                                          message: "Для некоторых городов не удалось загрузить данные о погоде",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ОК", style: .default))
+            self.present(alert, animated: true, completion: nil)
+        })
     }
 }
 
-// MARK: - UI methods
+// MARK: - Methods for configure UI
 extension HomeViewController {
     private func setupUI() {
         view.backgroundColor = .white
-        title = "Weather"
+        title = "Погода"
         navigationItem.backButtonTitle = ""
         let button = SearchButton(frame: .zero)
         button.setTitle("Поиск", for: .normal)
@@ -39,12 +46,13 @@ extension HomeViewController {
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
         button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         button.addTarget(self, action: #selector(searchCity), for: .touchUpInside)
         
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.alignment = .center
-        stack.distribution = .fillProportionally
+        stack.alignment = .fill
+        stack.distribution = .fill
         stack.spacing = 16
         stack.autoresizesSubviews = false
         stack.addArrangedSubview(searchField)
@@ -57,17 +65,17 @@ extension HomeViewController {
         let stackTop = stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: +16)
         NSLayoutConstraint.activate([stackLeading, stackTrailing, stackTop])
         
-        tableView = UITableView(frame: .zero)
+        tableView = UITableView()
         tableView.backgroundColor = .white
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CityCell.self, forCellReuseIdentifier: CityCell.id)
+        tableView.tableFooterView = UIView()
         view.addSubview(tableView)
-        
-        let colLeading = tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: +16)
-        let colTrailing = tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-        let colTop = tableView.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: +16)
-        let colBottom = tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        NSLayoutConstraint.activate([colLeading, colTrailing, colTop, colBottom])
+        let tableViewLeading = tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: +16)
+        let tableViewTrailing = tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        let tableViewTop = tableView.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: +16)
+        let tableViewBottom = tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        NSLayoutConstraint.activate([tableViewLeading, tableViewTrailing, tableViewTop, tableViewBottom])
     }
     
     private func configureSearchField() -> UITextField {
@@ -77,20 +85,32 @@ extension HomeViewController {
         textField.clearButtonMode = .never
         textField.keyboardType = .webSearch
         textField.autocorrectionType = .no
+        textField.clearButtonMode = .whileEditing
+        textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return textField
     }
 }
 
 // MARK: - Searching methods
 extension HomeViewController {
-    
     @objc private func searchCity() {
+        guard let cityName = searchField.text, cityName != "" else { return }
+        model.loadWeather(for: cityName, onSuccess: { [unowned self] cityWeather in
+            self.coordinator?.showDetail(forCity: cityWeather)
+        }, onError: { [unowned self] (cityName) in
+            let alert = UIAlertController(title: "Ошибка",
+                                          message: "Не удалось загрузить данные о погоде в г. \(cityName)",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ОК", style: .default))
+            self.present(alert, animated: true, completion: nil)
+        })
     }
 }
 
 // MARK: - UITextFieldDelegate conforming
 extension HomeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchCity()
         return true
     }
 }
@@ -98,12 +118,15 @@ extension HomeViewController: UITextFieldDelegate {
 // MARK: - UITableViewDataSource conforming
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return model.citiesWeather.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CityCell.id, for: indexPath) as! CityCell
-        cell.configure(city: "new york", temperature: "-300", weather: "well done")
+        let cell = CityCell(style: .default, reuseIdentifier: CityCell.id)
+        guard !model.citiesWeather.isEmpty else { return cell }
+        let index = indexPath.row
+        cell.configure(city: model[index].name, temperature: model[index].temp)
+        model.setWeatherImage(forIndex: indexPath.row, for: cell.weatherImageView)
         return cell
     }
 }
@@ -116,6 +139,6 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        coordinator?.showDetail(forCity: "City name")
+        coordinator?.showDetail(forCity: model[indexPath.row])
     }
 }

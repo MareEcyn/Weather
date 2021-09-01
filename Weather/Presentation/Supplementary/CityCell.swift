@@ -4,7 +4,7 @@ class CityCell: UITableViewCell {
     static let id = "cityCell"
     private let city: String = ""
     private let temperature: String = ""
-    private let weather: String = ""
+    let weatherImageView = UIImageView()
     
     required init?(coder: NSCoder) { return nil }
     
@@ -12,21 +12,22 @@ class CityCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
-    func configure(city: String, temperature: String, weather: String) {
+    func configure(city: String, temperature: String) {
         let cityName = UILabel()
         cityName.text = city
-        let cityTemperature = UILabel(frame: .zero)
-        cityTemperature.text = temperature
-        let cityWeather = UILabel(frame: .zero)
-        cityWeather.text = weather
-        let stack = UIStackView()
+        cityName.font = .preferredFont(forTextStyle: .title1, weight: .light)
+        cityName.adjustsFontForContentSizeCategory = true
+        cityName.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        let cityTemperature = UILabel()
+        cityTemperature.font = .preferredFont(forTextStyle: .title1)
+        cityTemperature.adjustsFontForContentSizeCategory = true
+        cityTemperature.textColor = .gray
+        cityTemperature.text = temperature + " °C"
+        weatherImageView.contentMode = .scaleAspectFit
+        weatherImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        let stack = UIStackView(arrangedSubviews: [cityName, cityTemperature, weatherImageView])
         stack.axis = .horizontal
-        stack.alignment = .center
-        stack.distribution = .equalCentering
-        stack.spacing = 16
-        stack.addArrangedSubview(cityName)
-        stack.addArrangedSubview(cityTemperature)
-        stack.addArrangedSubview(cityWeather)
+        stack.spacing = 4
         addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
         let stackLeading = stack.leadingAnchor.constraint(equalTo: leadingAnchor)

@@ -5,6 +5,7 @@ class SearchButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .interactivGreen
         addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
         addTarget(self, action: #selector(buttonTouchUp), for: [.touchUpInside, .touchUpOutside])
     }
